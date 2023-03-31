@@ -1,0 +1,38 @@
+.product {
+    border: 1px solid #95A0A7;
+    width: 300px;
+    height: 510px;
+    border-radius: 8px;
+    position: relative;
+   
+}
+.product img {
+   
+    width: 95%;
+    margin: 7px;
+   
+    border-radius: 5px;
+ 
+}
+.p-info {
+    margin: 14px;
+}
+.p-info p {
+    margin-top: 5px;
+}
+.p-name {
+    margin-top: 0px;
+    margin-bottom: 0;
+    font-family: Lato;
+  font-weight:400;
+  font-size: 21px;
+  line-height:25px;
+  color: #0e161a;
+}
+.btn-cart {
+    
+    width: 100%;
+    background-color: #FFE0B3;
+    position: absolute;
+    bottom: 0;
+}
