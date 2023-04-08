@@ -1,3 +1,23 @@
 .review-container {
     margin: 150px auto;
 }
+ a {
+    text-decoration: none;
+}
+.btn-proceed {
+    background: #FF9900;
+    width: 90%;
+margin: 10px auto;
+display: inline-flex;
+justify-content: space-between;
+border-radius: 4px;
+color: #fff;
+height: 56px;
+font-size: 21px;
+align-items: center;
+border: 0;
+
+}
+.btn-proceed:hover {
+    background: #ff9944;
+}

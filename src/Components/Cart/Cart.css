@@ -11,3 +11,21 @@
 .cart h6 {
     font-size:21px;
 }
+.btn-clear {
+background: #FF3030;
+width: 90%;
+margin: 10px auto;
+display: inline-flex;
+justify-content: space-between;
+border-radius: 4px;
+color: #fff;
+height: 56px;
+font-size: 21px;
+align-items: center;
+border: 0;
+
+
+}
+.btn-clear:hover {
+   background: #a12222; 
+}
