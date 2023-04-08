@@ -30,9 +30,11 @@
   color: #0e161a;
 }
 .btn-cart {
-    
+    font-size: 18px;
     width: 100%;
     background-color: #FFE0B3;
     position: absolute;
     bottom: 0;
+    height:48px;
+    border: 0;
 }
