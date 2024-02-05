@@ -1,0 +1,8 @@
+.icon-set {
+  position: relative;
+}
+.eye-icon {
+  position: absolute;
+  right: 85px;
+  top: 45px;
+}

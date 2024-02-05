@@ -1,0 +1,11 @@
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.loader-content { 
+        width: fit-content;
+}
+.loader {
+ 
+}

@@ -17,6 +17,21 @@ nav.header a {
 }
 nav.header a:hover {
   text-decoration: underline;
+
   color: #ebc621;
-  
+}
+.user-profile {
+  margin: 5px 0;
+}
+.btn-signout {
+  margin-left: 10px;
+  padding: 5px;
+  border-radius: 5px;
+  color: #ffffff;
+  background: none;
+  border: 1px solid #ff9900;
+}
+.btn-signout:hover {
+  background: #ff9900;
+  color: #1c2b35;
 }

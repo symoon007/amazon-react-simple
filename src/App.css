@@ -1,6 +1,8 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital@0;1&family=Raleway:wght@500&display=swap');
 #root {
   min-width: 100%;
-  
+  font-family: Lato, sans-serif;
  
 }
 
