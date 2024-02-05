@@ -1,4 +1,3 @@
-//SignUp.jsx
 import React, { useContext, useState } from "react";
 import "./SignUp.css";
 import { Link } from "react-router-dom";
@@ -9,42 +8,48 @@ import Icon from "react-icons-kit";
 import { AuthContext } from "../providers/AuthProviders";
 import { sendEmailVerification } from "firebase/auth";
 
+// Component for user sign-up
 const SignUp = () => {
+  // State variables for error, success messages, password visibility, and icons
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [passwordType, setPasswordType] = useState("password");
   const [confirmPasswordType, setConfirmPasswordType] = useState("password");
   const [passwordIcon, setPasswordIcon] = useState(eyeOff);
   const [confirmPasswordIcon, setConfirmPasswordIcon] = useState(eyeOff);
+
+  // Accessing user and createUser function from AuthContext
   const { user, createUser } = useContext(AuthContext);
 
+  // State variable for form data
   const [formData, setFormData] = useState({
     email: "",
     password: "",
     passwordConfirm: "",
   });
+
+  // Function to toggle password visibility
   const handlePasswordHide = (field) => {
     if (field === "password") {
-      if (passwordType === "password") {
-        setPasswordIcon(eye);
-        setPasswordType("text");
-      } else {
-        setPasswordIcon(eyeOff);
-        setPasswordType("password");
-      }
+      setPasswordType((prevType) =>
+        prevType === "password" ? "text" : "password"
+      );
+      setPasswordIcon((prevIcon) => (prevIcon === eye ? eyeOff : eye));
     } else if (field === "confirmPassword") {
-      if (confirmPasswordType === "password") {
-        setConfirmPasswordIcon(eye);
-        setConfirmPasswordType("text");
-      } else {
-        setConfirmPasswordIcon(eyeOff);
-        setConfirmPasswordType("password");
-      }
+      setConfirmPasswordType((prevType) =>
+        prevType === "password" ? "text" : "password"
+      );
+      setConfirmPasswordIcon((prevIcon) => (prevIcon === eye ? eyeOff : eye));
     }
   };
+
+  // Function to show error notification
   const errorNotify = (value) => toast.error(value);
+
+  // Function to show success notification
   const successNotify = (value) => toast.success(value);
 
+  // Function to handle input change
   const handleInputChange = (e) => {
     setFormData((prev) => ({
       ...prev,
@@ -52,51 +57,49 @@ const SignUp = () => {
     }));
   };
 
+  // Function to handle user signup
   const handleSignup = (event) => {
     event.preventDefault();
 
     setError("");
     setSuccess("");
     if (formData.password.length < 6 || formData.passwordConfirm.length < 6) {
-      setError(errorNotify("Password Should be at leat 6 characters!"));
+      setError(errorNotify("Password should be at least 6 characters!"));
       return;
     } else if (formData.password !== formData.passwordConfirm) {
-      setError(errorNotify("Password did't match!"));
-
+      setError(errorNotify("Passwords don't match!"));
       return;
     }
     createUser(formData.email, formData.password)
       .then((result) => {
-        setSuccess(successNotify("User Created Successfully!"));
+        setSuccess(successNotify("User created successfully!"));
         setFormData({
           email: "",
           password: "",
           passwordConfirm: "",
         });
         sendMailVerification(result.user);
-        console.log("call mail verify func:", sendMailVerification);
       })
       .catch((error) => {
-        setError(errorNotify("User Created Failed! Try again"));
+        setError(errorNotify("User creation failed! Try again"));
         console.error(error.message);
       });
-    console.log("create user: ", createUser);
   };
+
+  // Function to send email verification
   const sendMailVerification = (user) => {
     sendEmailVerification(user)
       .then(() => {
         alert("Verify your email!");
-        console.log("User mail verifiy func : ", user);
-        return;
       })
       .catch((error) => {
         console.error(error);
       });
   };
 
+  // JSX return for the SignUp component
   return (
     <div className="form-container">
-      <div></div>
       <h2 className="form-title">Sign Up</h2>
       <form onSubmit={handleSignup}>
         <div className="form-control">
@@ -154,7 +157,7 @@ const SignUp = () => {
           Already have an account? <Link to="/login">Login</Link>{" "}
         </small>
       </p>
-
+      {/* Toast component for notifications */}
       <Toaster />
     </div>
   );

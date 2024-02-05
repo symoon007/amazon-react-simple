@@ -1,4 +1,3 @@
-//Login.jsx
 import React, { useContext, useState } from "react";
 import "./Login.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -8,40 +7,51 @@ import { eyeOff } from "react-icons-kit/feather/eyeOff";
 import { eye } from "react-icons-kit/feather/eye";
 import Icon from "react-icons-kit";
 
+// Component for user login
 const Login = () => {
+  // Accessing signIn function from AuthContext
   const { signIn } = useContext(AuthContext);
+
+  // State variables for error, success messages, password visibility, and icon
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [passwordType, setPasswordType] = useState("password");
   const [icon, setIcon] = useState(eyeOff);
+
+  // State variable for form data
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+
+  // Function to toggle password visibility
   const handlePasswordHide = () => {
-    if (passwordType === "password") {
-      setIcon(eye);
-      setPasswordType("text");
-    } else {
-      setPasswordType("password");
-      setIcon(eyeOff);
-    }
+    setPasswordType((prevType) =>
+      prevType === "password" ? "text" : "password"
+    );
+    setIcon((prevIcon) => (prevIcon === eye ? eyeOff : eye));
   };
+
+  // Hooks for navigation
   const navigate = useNavigate();
   const location = useLocation();
-
   const from = location.state?.from?.pathname || "/";
 
-  const handleInputchange = (e) => {
+  // Function to handle input change
+  const handleInputChange = (e) => {
     setFormData((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
     }));
   };
 
+  // Function to show error notification
   const errorNotify = (value) => toast.error(value);
+
+  // Function to show success notification
   const successNotify = (value) => toast.success(value);
 
+  // Function to handle user login
   const handleLogin = (event) => {
     event.preventDefault();
 
@@ -50,7 +60,6 @@ const Login = () => {
         const loggedUser = result.user;
         if (loggedUser && loggedUser.emailVerified) {
           // User is logged in and email is verified
-          //  toast.success("Logged in successfully");
           setSuccess(successNotify("Log in successful!"));
           setFormData({
             email: "",
@@ -71,6 +80,7 @@ const Login = () => {
       });
   };
 
+  // JSX return for the Login component
   return (
     <div className="form-container">
       <h2 className="form-title">Login</h2>
@@ -80,7 +90,7 @@ const Login = () => {
           <input
             type="email"
             value={formData.email}
-            onChange={handleInputchange}
+            onChange={handleInputChange}
             name="email"
             id="email"
             required
@@ -91,7 +101,7 @@ const Login = () => {
           <label htmlFor="password">Password</label>
           <input
             value={formData.password}
-            onChange={handleInputchange}
+            onChange={handleInputChange}
             type={passwordType}
             name="password"
             id="password"
@@ -106,9 +116,10 @@ const Login = () => {
       </form>
       <p className="site-link">
         <small>
-          Already have an account? <Link to="/signup">Sign Up</Link>
+          Don't have an account? <Link to="/signup">Sign Up</Link>
         </small>
       </p>
+      {/* Toast component for notifications */}
       <Toaster />
     </div>
   );
